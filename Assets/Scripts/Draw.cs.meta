@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 1f46cd3b8da23714ba4edc88e7937ff6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Card1: {fileID: 342896724480434692, guid: 792c4e332c9f6654f8e18c6f51a846ca, type: 3}
+  - HandArea: {fileID: 6520301337790157047, guid: bd9e24a16eaaeb04982c06948e1a0cf1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
