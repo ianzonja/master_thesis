@@ -29,12 +29,24 @@ public class Player : NetworkBehaviour
             Debug.Log("Kreiram mu id");
             MyData.id = Guid.NewGuid();
         }
-        Hola(MyData.id);
+        if (!MyData.IsServer)
+            Hola(MyData.id);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!MyData.IsServer && MyData.IsDealer)
+            DealCardsCommand();
+    }
+
+    [ClientRpc]
+    private void DealCardsCommand()
+    {
+        for(int i=0; i<10; i++)
+        {
+
+        }
     }
 
     public override void OnStartServer()
@@ -64,6 +76,7 @@ public class Player : NetworkBehaviour
         MyData.onlinePlayers = op;
         if(SceneManager.GetActiveScene().name == "Start")
         {
+            Debug.Log("Idem na Login");
             SceneManager.LoadScene("Lobby");
         }
     }

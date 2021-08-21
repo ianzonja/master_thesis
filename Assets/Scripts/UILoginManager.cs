@@ -7,11 +7,10 @@ public class UILoginManager : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene("Login");
+
     }
 
     public void OnJoinButtonClicked()
     {
-        SceneManager.LoadScene("Lobby");
     }
 }

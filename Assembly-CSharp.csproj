@@ -61,14 +61,22 @@
     <Compile Include="Assets\Scripts\MyData.cs" />
     <Compile Include="Assets\Scripts\OnlinePlayersText.cs" />
     <Compile Include="Assets\Scripts\OnLobbyLoaded.cs" />
-    <Compile Include="Assets\ClientConnect.cs" />
-    <Compile Include="Assets\Scripts\Lobby.cs" />
+    <Compile Include="Assets\Scripts\ClientConnect.cs" />
+    <Compile Include="Assets\Scripts\PlayfabManager.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
+    <Compile Include="Assets\Scripts\OnlinePlayers.cs" />
     <Compile Include="Assets\Scripts\TotalPlayers.cs" />
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\ServerManagement.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\UILoginManager.cs" />
-    <Compile Include="Assets\Scripts\OnlinePlayers.cs" />
+    <Compile Include="Assets\Scripts\RoomSetupUI.cs" />
+    <Compile Include="Assets\Scripts\RoomUI.cs" />
+    <Compile Include="Assets\Scripts\CardManager.cs" />
+    <Compile Include="Assets\Scripts\CardData.cs" />
+    <Compile Include="Assets\Scripts\GameUIManager.cs" />
+    <Compile Include="Assets\Scripts\TcpClient.cs" />
+    <Compile Include="Assets\Scripts\LoginUIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
@@ -754,6 +762,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PlayFabSDKEditor.csproj">
+      <Project>{BDAF5098-2295-91E7-9E6D-DC3D5CE08319}</Project>
+      <Name>PlayFabSDKEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Mirror.csproj">
       <Project>{97F04D2F-AB6F-DF80-2158-7687566B0624}</Project>
       <Name>Mirror</Name>
@@ -762,9 +774,17 @@
       <Project>{60CF3CB6-044B-E6F3-D7DB-5A123DF90293}</Project>
       <Name>kcp2k</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFabEditorExtensions.csproj">
+      <Project>{D7D68913-C311-C6F1-4F1A-C693CD03DF84}</Project>
+      <Name>PlayFabEditorExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">
       <Project>{B11BF150-3DCA-AECF-950F-C75A2D250537}</Project>
       <Name>Mirror.Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFab.csproj">
+      <Project>{8F5A8358-A4DF-A091-9236-290BF116C2D9}</Project>
+      <Name>PlayFab</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Weaver.csproj">
       <Project>{D0BF48A5-792E-35A1-82EC-D05DCD8DB2B6}</Project>
