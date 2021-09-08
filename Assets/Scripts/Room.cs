@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class Room
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PlayerData[] Players { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string Id { get; set; }
+    public string HostPlayfabId { get; set; }
 }
