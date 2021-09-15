@@ -10,7 +10,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.InGamePlayers;
+            return MyData.Instance.InGamePlayers;
         }
     }
 
@@ -18,7 +18,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.InGamePlayers = players;
+            MyData.Instance.InGamePlayers = players;
         }
     }
 
@@ -26,7 +26,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.Username;
+            return MyData.Instance.Username;
         }
     }
 
@@ -34,7 +34,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.Username = username;
+            MyData.Instance.Username = username;
         }
     }
 
@@ -42,7 +42,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.MyPlayfabId;
+            return MyData.Instance.MyPlayfabId;
         }
     }
 
@@ -50,7 +50,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.MyPlayfabId = playfabId;
+            MyData.Instance.MyPlayfabId = playfabId;
         }
     }
 
@@ -58,7 +58,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.IsLoggedIn;
+            return MyData.Instance.IsLoggedIn;
         }
     }
 
@@ -66,7 +66,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.IsLoggedIn = loggedInStatus;
+            MyData.Instance.IsLoggedIn = loggedInStatus;
         }
     }
 
@@ -74,7 +74,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.SessionTicket = sessionTicket;
+            MyData.Instance.SessionTicket = sessionTicket;
         }
     }
 
@@ -82,7 +82,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.SessionTicket;
+            return MyData.Instance.SessionTicket;
         }
     }
 
@@ -90,7 +90,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.Room = room;
+            MyData.Instance.Room = room;
         }
     }
 
@@ -98,7 +98,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.Room;
+            return MyData.Instance.Room;
         }
     }
 
@@ -106,7 +106,7 @@ public class DataManager
     {
         lock (_Lock)
         {
-            MyData.LobbyRooms = rooms;
+            MyData.Instance.LobbyRooms = rooms;
         }
     }
 
@@ -114,7 +114,30 @@ public class DataManager
     {
         lock (_Lock)
         {
-            return MyData.LobbyRooms;
+            return MyData.Instance.LobbyRooms;
         }
+    }
+
+    public PlayerData GetRoomPlayerByPlayfabId(string playfabId)
+    {
+        PlayerData player = null;
+        lock (_Lock)
+        {
+            PlayerData[] players = MyData.Instance.Room.Players;
+            for(int i=0; i<players.Length; i++)
+            {
+                if (players[i].PlayfabId == playfabId)
+                    player = players[i];
+            }
+        }
+        if (player != null)
+            return player;
+        else
+        {
+            Debug.Log("Greska! Nisam pronasao igraca sa tim playfabIdem");
+            return player;
+        }
+
+
     }
 }

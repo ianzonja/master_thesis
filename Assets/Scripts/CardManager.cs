@@ -21,9 +21,9 @@ public class CardManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MyData.IsDealer)
+        if (MyData.Instance.IsDealer)
             this.DealCards();
-        if (MyData.IsNewRound && MyData.CardsDealt)
+        if (MyData.Instance.IsNewRound && MyData.Instance.CardsDealt)
         {
             this.InstatiateCards();
         }

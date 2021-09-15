@@ -238,6 +238,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7abbdfa24ec86745a14dabadf0cfafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBox1: {fileID: 1891057221}
+  playerBox2: {fileID: 1163549092}
+  playerBox3: {fileID: 2134955115}
+  playerBox4: {fileID: 1632721024}
+  readyStartButtonText: {fileID: 1003779834}
+  playerStatus1: {fileID: 1644041890}
+  playerStatus2: {fileID: 799678752}
+  playerStatus3: {fileID: 2108149437}
+  playerStatus4: {fileID: 1627399885}
+  PlayerReady: {fileID: 21300000, guid: 33cd3b491748050418115b4d3a0b6534, type: 3}
+  PlayerNotReady: {fileID: 21300000, guid: f9619563aba8b7542abf0aabdc638afe, type: 3}
 --- !u!1 &32465855
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +812,7 @@ GameObject:
   - component: {fileID: 208399220}
   - component: {fileID: 208399222}
   - component: {fileID: 208399221}
+  - component: {fileID: 208399223}
   m_Layer: 5
   m_Name: UsernameText
   m_TagString: Untagged
@@ -869,6 +881,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208399219}
   m_CullTransparentMesh: 1
+--- !u!114 &208399223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208399219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed99c3aae7247e438e08a1f250b7e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &297674768
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +904,7 @@ GameObject:
   - component: {fileID: 297674769}
   - component: {fileID: 297674771}
   - component: {fileID: 297674770}
+  - component: {fileID: 297674772}
   m_Layer: 5
   m_Name: UsernameText
   m_TagString: Untagged
@@ -948,6 +973,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297674768}
   m_CullTransparentMesh: 1
+--- !u!114 &297674772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297674768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfbe5f6b9d4683b469a69e500032a269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &309365304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1067,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 309365307}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 14942390}
+        m_TargetAssemblyTypeName: RoomUI, Assembly-CSharp
+        m_MethodName: OnKickPlayer2ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &309365307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2238,7 +2287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 749568909}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 14942390}
+        m_TargetAssemblyTypeName: RoomUI, Assembly-CSharp
+        m_MethodName: OnKickPlayer3ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &749568909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2666,6 +2727,7 @@ GameObject:
   - component: {fileID: 934986186}
   - component: {fileID: 934986188}
   - component: {fileID: 934986187}
+  - component: {fileID: 934986189}
   m_Layer: 5
   m_Name: GameTitle
   m_TagString: Untagged
@@ -2734,6 +2796,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934986185}
   m_CullTransparentMesh: 1
+--- !u!114 &934986189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934986185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2f4a04c6adb154da0922a773423129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &992641952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,6 +2894,7 @@ GameObject:
   - component: {fileID: 1003779835}
   - component: {fileID: 1003779837}
   - component: {fileID: 1003779836}
+  - component: {fileID: 1003779838}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -2888,6 +2963,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003779834}
   m_CullTransparentMesh: 1
+--- !u!114 &1003779838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003779834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d223f26db7b70408c319d15feb4382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1014227920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,7 +3085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1163549093}
   m_Layer: 5
-  m_Name: PlayerBox (1)
+  m_Name: PlayerBox_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3588,7 +3675,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1428232035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 14942390}
+        m_TargetAssemblyTypeName: RoomUI, Assembly-CSharp
+        m_MethodName: OnKickPlayer4ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1428232035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3868,8 +3967,9 @@ GameObject:
   - component: {fileID: 1509049275}
   - component: {fileID: 1509049274}
   - component: {fileID: 1509049273}
+  - component: {fileID: 1509049276}
   m_Layer: 0
-  m_Name: CreateRoomButton
+  m_Name: ReadyStartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3989,6 +4089,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509049271}
   m_CullTransparentMesh: 1
+--- !u!114 &1509049276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509049271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5817ad033db016b4abb7f47497bf7197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1515559856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,6 +4187,7 @@ GameObject:
   - component: {fileID: 1531937052}
   - component: {fileID: 1531937054}
   - component: {fileID: 1531937053}
+  - component: {fileID: 1531937055}
   m_Layer: 5
   m_Name: UsernameText
   m_TagString: Untagged
@@ -4143,6 +4256,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531937051}
   m_CullTransparentMesh: 1
+--- !u!114 &1531937055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531937051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5022fb5c979e694419f9f6eabe8e3b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1542812698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,7 +4852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632721025}
   m_Layer: 5
-  m_Name: PlayerBox (3)
+  m_Name: PlayerBox_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4742,7 +4867,7 @@ RectTransform:
   m_GameObject: {fileID: 1632721024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 531858253}
   - {fileID: 1865893683}
@@ -5114,7 +5239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891057222}
   m_Layer: 5
-  m_Name: PlayerBox
+  m_Name: PlayerBox_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5158,6 +5283,7 @@ GameObject:
   - component: {fileID: 1906695965}
   - component: {fileID: 1906695967}
   - component: {fileID: 1906695966}
+  - component: {fileID: 1906695968}
   m_Layer: 5
   m_Name: RankArea
   m_TagString: Untagged
@@ -5226,6 +5352,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906695964}
   m_CullTransparentMesh: 1
+--- !u!114 &1906695968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906695964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df83d79e634c25d41bf502c091d72c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908297919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,6 +5612,7 @@ GameObject:
   - component: {fileID: 2028490093}
   - component: {fileID: 2028490095}
   - component: {fileID: 2028490094}
+  - component: {fileID: 2028490096}
   m_Layer: 5
   m_Name: UsernameText
   m_TagString: Untagged
@@ -5542,6 +5681,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028490092}
   m_CullTransparentMesh: 1
+--- !u!114 &2028490096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028490092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c33dac6763f824b8a00744085d6ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2035456118
 GameObject:
   m_ObjectHideFlags: 0
@@ -5774,7 +5925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2134955116}
   m_Layer: 5
-  m_Name: PlayerBox (2)
+  m_Name: PlayerBox_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

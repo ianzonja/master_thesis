@@ -2,23 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public static class MyData
+public class MyData
 {
-    public static string Username { get; set; }
+    private static MyData instance = null;
+    private static readonly object padlock = new object();
+
+    private MyData()
+    {
+    }
+
+    public static MyData Instance
+    {
+        get
+        {
+            lock (padlock)
+            {
+                if (instance == null)
+                {
+                    instance = new MyData();
+                }
+                return instance;
+            }
+        }
+    }
+
+    public string Username { get; set; }
+
+    public bool IsLoggedIn { get; set; }
+    public bool IsDealer { get; set; }
+    public bool IsNewRound { get; set; }
+    public bool CardsDealt { get; set; }
     
-    public static bool IsLoggedIn { get; set; }
-    public static bool IsDealer { get; set; }
-    public static bool IsNewRound { get; set; }
-    public static bool CardsDealt { get; set; }
-    
-    public static string SessionTicket { get; internal set; }
+    public string SessionTicket { get; internal set; }
 
-    public static string MyPlayfabId { get; set; }
+    public string MyPlayfabId { get; set; }
 
-    public static List<PlayerData> InGamePlayers { get; set; }
+    public List<PlayerData> InGamePlayers { get; set; }
 
-    public static Room Room { get; set; }
+    public Room Room { get; set; }
 
-    public static List<Room> LobbyRooms { get; set; }
+    public List<Room> LobbyRooms { get; set; }
 }
 

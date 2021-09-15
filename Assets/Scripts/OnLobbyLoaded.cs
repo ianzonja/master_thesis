@@ -5,6 +5,8 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Scripting;
+using System;
 
 public class LobbyResponse{
     public string NumberOfPlayers { get; set; }
@@ -26,17 +28,27 @@ public class OnLobbyLoaded : MonoBehaviour
         Debug.Log(new DataManager().IsLoggedIn());
         while (new DataManager().IsLoggedIn())
         {
-            if (FrameCounter % 60 == 0)
+            try
             {
-                TcpKlijent klijent = new TcpKlijent();
-                klijent.PosaljiServeru("{\"commandId\":\"YOGIVEMEROOMINFO\", \"sessionTicket\":\"" + MyData.SessionTicket + "\"}");
-                string odgovor = klijent.PrimiOdServera();
-                //var sth = JsonConvert.DeserializeObject<object>(odgovor);
-                Debug.Log("Primio sam odgovor:" + odgovor);
-                LobbyResponse response = JsonConvert.DeserializeObject<LobbyResponse>(odgovor);
-                DataManager dm = new DataManager();
-                dm.SetLobbyRooms(response.Rooms);
-                klijent.ZatvoriSocket();
+                if (FrameCounter % 240 == 0)
+                {
+                    FrameCounter = 0;
+                    TcpKlijent klijent = new TcpKlijent();
+                    klijent.PosaljiServeru("{\"commandId\":\"YOGIVEMEROOMINFO\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\"}");
+                    string odgovor = klijent.PrimiOdServera();
+                    //var sth = JsonConvert.DeserializeObject<object>(odgovor);
+                    Debug.Log("Primio sam odgovor:" + odgovor);
+                    if(!odgovor.Contains("Netocni podaci"))
+                    {
+                        LobbyResponse response = JsonConvert.DeserializeObject<LobbyResponse>(odgovor);
+                        DataManager dm = new DataManager();
+                        dm.SetLobbyRooms(response.Rooms);
+                    }
+                    klijent.ZatvoriSocket();
+                }
+            }catch(Exception ex)
+            {
+                Debug.Log(ex.ToString());
             }
         }
     }
@@ -49,7 +61,8 @@ public class OnLobbyLoaded : MonoBehaviour
 
     private void Update()
     {
-        if(FrameCounter % 120 == 0)
+        FrameCounter++;
+        if(FrameCounter%60 == 0)
         {
             DataManager dm = new DataManager();
             string username = dm.GetMyUsername();
@@ -67,10 +80,10 @@ public class OnLobbyLoaded : MonoBehaviour
                     var newRoom = Instantiate(RoomUI, new Vector3(0, 0, 0), Quaternion.identity);
                     newRoom.transform.SetParent(contentUI.transform);
                     newRoom.name = room.Id;
+                    newRoom.GetComponent<LobbyRoomUIData>().SetRoomUIData(room);
                 }
             }
         }
-        FrameCounter++;
     }
 
     public void OnCreateRoomButtonClick()

@@ -80,6 +80,14 @@
     <Compile Include="Assets\Scripts\CardManager.cs" />
     <Compile Include="Assets\Scripts\RoomSetupUI.cs" />
     <Compile Include="Assets\Scripts\UILoginManager.cs" />
+    <Compile Include="Assets\Scripts\RoomGameTitleUI.cs" />
+    <Compile Include="Assets\Scripts\PlayerBox1UI.cs" />
+    <Compile Include="Assets\Scripts\PlayerBox1UsernameUI.cs" />
+    <Compile Include="Assets\Scripts\PlayerBox2UsernameUI.cs" />
+    <Compile Include="Assets\Scripts\PlayerBox3UsernameUI.cs" />
+    <Compile Include="Assets\Scripts\PlayerBox4UsernameUI.cs" />
+    <Compile Include="Assets\Scripts\RoomButtonUI.cs" />
+    <Compile Include="Assets\Scripts\RoomButtonTextUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />

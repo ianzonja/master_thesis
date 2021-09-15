@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using Newtonsoft.Json;
+
+public class JoinLobbyRoomResponse
+{
+    public string ResponseId { get; set; }
+    public Room MyData { get; set; }
+}
 
 public class LobbyRoomUIData : MonoBehaviour
 {
@@ -63,15 +70,16 @@ public class LobbyRoomUIData : MonoBehaviour
         }
         GameObject seatsTaken = GameObject.Find("SeatsTaken");
         seatsTaken.GetComponent<Text>().text = "Seats available: " + (4 - room.Players.Length) + "/4";
-    }
-
-    public void OnJoinRoomButtonClick()
-    {
-        Debug.Log("join room klik!");
-        TcpKlijent klijent = new TcpKlijent();
-        DataManager dm = new DataManager();
-        klijent.PosaljiServeru("{\"commandId\":\"YOMEJOININGTHEROOM\", \"sessionTicket\":\"" + dm.GetMyPlayfabId() + "\", \"roomId\":\""+this.room.Id+"\"}");
-        string odgovor = klijent.PrimiOdServera();
-        SceneManager.LoadScene("Room");
+        this.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            TcpKlijent klijent = new TcpKlijent();
+            klijent.PosaljiServeru("{\"commandId\":\"YOIWANNAJOIN\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"roomId\": \""+room.Id+"\"}");
+            string odgovor = klijent.PrimiOdServera();
+            Debug.Log(odgovor);
+            JoinLobbyRoomResponse response = JsonConvert.DeserializeObject<JoinLobbyRoomResponse>(odgovor);
+            DataManager dm = new DataManager();
+            dm.SetRoom(response.MyData);
+            SceneManager.LoadScene("Room");
+        });
     }
 }

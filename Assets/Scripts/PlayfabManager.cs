@@ -69,6 +69,7 @@ public class PlayfabManager : MonoBehaviour
         TcpKlijent klijent = new TcpKlijent();
         DataManager dm = new DataManager();
         dm.SetMySessionTicket(obj.SessionTicket);
+        dm.SetMyPlayfabId(obj.PlayFabId);
         klijent.PosaljiServeru("{\"commandId\":\"YOIJUSTREGISTERED\", \"sessionTicket\":\"" + obj.SessionTicket + "\"}");
         string odgovor = klijent.PrimiOdServera();
         dm.SetPlayerLoggedIn(true);
@@ -85,6 +86,7 @@ public class PlayfabManager : MonoBehaviour
         TcpKlijent klijent = new TcpKlijent();
         DataManager dm = new DataManager();
         dm.SetMySessionTicket(result.SessionTicket);
+        dm.SetMyPlayfabId(result.PlayFabId);
         klijent.PosaljiServeru("{\"commandId\":\"YOIJUSTLOGGEDIN\", \"sessionTicket\":\"" + result.SessionTicket+"\"}");
         string odgovor = klijent.PrimiOdServera();
         LoginResponse parsedResponse = JsonConvert.DeserializeObject<LoginResponse>(odgovor);
