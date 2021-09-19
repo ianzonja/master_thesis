@@ -28,6 +28,8 @@ public class MyData
 
     public string Username { get; set; }
 
+    public string Jwt { get; set; }
+
     public bool IsLoggedIn { get; set; }
     public bool IsDealer { get; set; }
     public bool IsNewRound { get; set; }

@@ -140,4 +140,20 @@ public class DataManager
 
 
     }
+
+    public void SetJwt(string token)
+    {
+        lock (_Lock)
+        {
+            MyData.Instance.Jwt = token;
+        }
+    }
+
+    public string GetJwt()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.Jwt;
+        }
+    }
 }

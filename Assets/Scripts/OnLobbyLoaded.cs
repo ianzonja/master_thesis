@@ -30,11 +30,11 @@ public class OnLobbyLoaded : MonoBehaviour
         {
             try
             {
-                if (FrameCounter % 240 == 0)
+                if (FrameCounter % 60 == 0)
                 {
                     FrameCounter = 0;
                     TcpKlijent klijent = new TcpKlijent();
-                    klijent.PosaljiServeru("{\"commandId\":\"YOGIVEMEROOMINFO\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\"}");
+                    klijent.PosaljiServeru("{\"commandId\":\"YOGIVEMEROOMINFO\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"Jwt\":\""+new DataManager().GetJwt()+ "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
                     string odgovor = klijent.PrimiOdServera();
                     //var sth = JsonConvert.DeserializeObject<object>(odgovor);
                     Debug.Log("Primio sam odgovor:" + odgovor);

@@ -6,11 +6,29 @@ using PlayFab.ClientModels;
 using System;
 using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
+
+public class ResponsePlayerData
+{
+    public string Jwt { get; set; }
+    public string Email { get; set; }
+    public string Username { get; set; }
+    public string Wins { get; set; }
+    public string Loses { get; set; }
+    public string Draws { get; set; }
+    public string PlayFabId { get; set; }
+    public object InGameStatus { get; set; }
+    public object Avatar { get; set; }
+}
+
+public class RegisterResponse
+{
+    public string ResponseId { get; set; }
+    public ResponsePlayerData MyData { get; set; }
+}
 public class LoginResponse
 {
     public string ResponseId { get; set; }
-
-    public string Username { get; set; }
+    public ResponsePlayerData MyData { get; set; }
 }
 
 public class PlayfabManager : MonoBehaviour
@@ -19,7 +37,6 @@ public class PlayfabManager : MonoBehaviour
     private string Password;
     private string Username;
     public bool UserLoggedIn = false;
-    private string PlayfabId = "6D8B1";
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +49,7 @@ public class PlayfabManager : MonoBehaviour
 
     public void Login(string email, string password)
     {
-        PlayFabSettings.TitleId = this.PlayfabId;
+        PlayFabSettings.TitleId = "6D8B1";
         this.Email = email;
         this.Password = password;
         Debug.Log(email);
@@ -43,7 +60,7 @@ public class PlayfabManager : MonoBehaviour
 
     public void Register(string email, string username, string password)
     {
-        PlayFabSettings.TitleId = this.PlayfabId;
+        PlayFabSettings.TitleId = "6D8B1";
         this.Email = email;
         this.Username = username;
         this.Password = password;
@@ -72,6 +89,8 @@ public class PlayfabManager : MonoBehaviour
         dm.SetMyPlayfabId(obj.PlayFabId);
         klijent.PosaljiServeru("{\"commandId\":\"YOIJUSTREGISTERED\", \"sessionTicket\":\"" + obj.SessionTicket + "\"}");
         string odgovor = klijent.PrimiOdServera();
+        RegisterResponse parsedResponse = JsonConvert.DeserializeObject<RegisterResponse>(odgovor);
+        dm.SetJwt(parsedResponse.MyData.Jwt);
         dm.SetPlayerLoggedIn(true);
         SceneManager.LoadScene("Lobby");
     }
@@ -91,8 +110,9 @@ public class PlayfabManager : MonoBehaviour
         string odgovor = klijent.PrimiOdServera();
         LoginResponse parsedResponse = JsonConvert.DeserializeObject<LoginResponse>(odgovor);
         Debug.Log("Primio sam odgovor:" + odgovor);
+        dm.SetJwt(parsedResponse.MyData.Jwt);
         klijent.ZatvoriSocket();
-        dm.SetMyUsername(parsedResponse.Username);
+        dm.SetMyUsername(parsedResponse.MyData.Username);
         dm.SetPlayerLoggedIn(true);
     }
 

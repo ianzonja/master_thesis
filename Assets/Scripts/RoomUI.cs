@@ -22,6 +22,7 @@ public class RoomUI : MonoBehaviour
     public GameObject playerStatus2;
     public GameObject playerStatus3;
     public GameObject playerStatus4;
+    public GameObject MessageText;
     public Sprite PlayerReady;
     public Sprite PlayerNotReady;
     private int frameCounter = 0;
@@ -61,10 +62,10 @@ public class RoomUI : MonoBehaviour
             if (this.room != null)
                 this.roomUpdated = false;
         }
-        if(frameCounter % 120 == 0)
+        if(frameCounter % 60 == 0)
         {
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"CommandId\":\"YOIMINROOM\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \""+MyData.Instance.MyPlayfabId+"\"}");
+            klijent.PosaljiServeru("{\"CommandId\":\"YOIMINROOM\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \""+MyData.Instance.MyPlayfabId+ "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             Debug.Log(odgovor);
             if(!odgovor.Contains("Netocni podaci"))
@@ -179,7 +180,7 @@ public class RoomUI : MonoBehaviour
         if (this.readyStartButtonText.GetComponent<Text>().text == "Start")
         {
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"commandId\":\"YOSTARTGAME\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\"}");
+            klijent.PosaljiServeru("{\"commandId\":\"YOSTARTGAME\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);
             if (response.ResponseId == "OK")
@@ -219,7 +220,7 @@ public class RoomUI : MonoBehaviour
         {
             string kickedPlayerId = this.room.Players[3].PlayfabId;
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\"}");
+            klijent.PosaljiServeru("{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);
             if (response.ResponseId == "OK")
@@ -237,7 +238,7 @@ public class RoomUI : MonoBehaviour
         {
             string kickedPlayerId = this.room.Players[3].PlayfabId;
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\"}");
+            klijent.PosaljiServeru("{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);
             if (response.ResponseId == "OK")
@@ -246,6 +247,21 @@ public class RoomUI : MonoBehaviour
                 this.room = response.MyData;
             }
         }
+    }
+
+    public void OnSendMessageButtonClick()
+    {
+        string text = this.MessageText.GetComponent<Text>().text;
+        if(text != "")
+        {
+            DataManager dm = new DataManager();
+            TcpKlijent client = new TcpKlijent();
+            client.PosaljiServeru("{\"CommandId\":\"YOIMSENDINROOMMESSAGE\", \"SessionTicket\":\"" + dm.GetMySessionTicket() + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"Text\":\"" + text + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
+            string odgovor = client.PrimiOdServera();
+
+
+        }
+
     }
 
     private void OnRoomLoaded()

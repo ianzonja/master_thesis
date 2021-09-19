@@ -73,7 +73,7 @@ public class LobbyRoomUIData : MonoBehaviour
         this.GetComponent<Button>().onClick.AddListener(() =>
         {
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"commandId\":\"YOIWANNAJOIN\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"roomId\": \""+room.Id+"\"}");
+            klijent.PosaljiServeru("{\"commandId\":\"YOIWANNAJOIN\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"roomId\": \""+room.Id+ "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             Debug.Log(odgovor);
             JoinLobbyRoomResponse response = JsonConvert.DeserializeObject<JoinLobbyRoomResponse>(odgovor);

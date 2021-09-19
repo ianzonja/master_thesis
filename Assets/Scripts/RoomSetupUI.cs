@@ -35,7 +35,7 @@ public class RoomSetupUI : MonoBehaviour
         string sessionTicket = new DataManager().GetMySessionTicket();
         if(sessionTicket != null)
         {
-            client.PosaljiServeru("{\"commandId\":\"YOIWANNAHOST\", \"sessionTicket\":\"" + sessionTicket + "\"}");
+            client.PosaljiServeru("{\"commandId\":\"YOIWANNAHOST\", \"sessionTicket\":\"" + sessionTicket + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = client.PrimiOdServera();
             Debug.Log(odgovor);
             RoomSetupResponse response = JsonConvert.DeserializeObject<RoomSetupResponse>(odgovor);
