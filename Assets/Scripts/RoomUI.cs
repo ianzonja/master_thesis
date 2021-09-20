@@ -83,6 +83,14 @@ public class RoomUI : MonoBehaviour
                         }
                     }
                 }
+                bool playersInGame = true;
+                for (int i = 0; i < this.room.Players.Length; i++)
+                {
+                    if (this.room.Players[i].InGameStatus != "GAME")
+                        playersInGame = false;
+                }
+                if (playersInGame)
+                    SceneManager.LoadScene("GAME");
             }
         }
         for(int i=0; i<this.room.Players.Length; i++)
@@ -91,12 +99,16 @@ public class RoomUI : MonoBehaviour
             {
                 if(this.playerBox1 != null)
                 {
-                    if (!this.playerBox1.activeSelf)
-                        this.playerBox1.SetActive(true);
-                    if (this.room.Players[i].InGameStatus == "READY")
-                        this.playerStatus1.GetComponent<Image>().sprite = this.PlayerReady;
+                    bool readyStart = true;
+                    for(int j=1; j<this.room.Players.Length; j++)
+                    {
+                        if (this.room.Players[j].InGameStatus != "READY")
+                            readyStart = false;
+                    }
+                    if(readyStart)
+                        this.readyStartButtonText.GetComponent<Text>().color = Color.green;
                     else
-                        this.playerStatus1.GetComponent<Image>().sprite = this.PlayerNotReady;
+                        this.readyStartButtonText.GetComponent<Text>().color = Color.red;
                     if (room.Players.Length == i + 1)
                         DisableEmptyBoxesIfEnabled(room.Players.Length);
                 }
@@ -164,32 +176,27 @@ public class RoomUI : MonoBehaviour
 
     public void OnStartGameButtonClick()
     {
-        if(this.readyStartButtonText.GetComponent<Text>().text == "Ready")
+        DataManager dm = new DataManager();
+        string status = dm.GetMyIngameStatus();
+        if(this.room.HostPlayfabId != dm.GetMyPlayfabId())
         {
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"commandId\":\"YOIMREADY\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\"}");
+            klijent.PosaljiServeru("{\"commandId\":\"YOIMREADY\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);
-            if(response.ResponseId == "OK")
-            {
-                this.readyStartButtonText.GetComponent<Text>().color = Color.green;
-                this.room = response.MyData;
-            }
-
+            this.room = response.MyData;
+            dm.SetRoom(this.room);
         }
-        if (this.readyStartButtonText.GetComponent<Text>().text == "Start")
+        else
         {
             TcpKlijent klijent = new TcpKlijent();
-            klijent.PosaljiServeru("{\"commandId\":\"YOSTARTGAME\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
+            klijent.PosaljiServeru("{\"commandId\":\"YOSTARTGAME\", \"sessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"playfabId\":\"" + new DataManager().GetMyPlayfabId() + "\", \"roomId\":\"" + new DataManager().GetRoom().Id + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}");
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);
             if (response.ResponseId == "OK")
             {
-                this.readyStartButtonText.GetComponent<Text>().color = Color.green;
                 this.room = response.MyData;
-                DataManager dm = new DataManager();
                 dm.SetRoom(this.room);
-                SceneManager.LoadScene("Game");
             }
         }
     }
@@ -201,7 +208,7 @@ public class RoomUI : MonoBehaviour
         {
             string kickedPlayerId = this.room.Players[1].PlayfabId;
             TcpKlijent klijent = new TcpKlijent();
-            string command = "{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\"}";
+            string command = "{\"CommandId\":\"YOIMKICKIN\", \"SessionTicket\":\"" + MyData.Instance.SessionTicket + "\", \"RoomID\": \"" + this.room.Id + "\", \"PlayfabId\": \"" + dm.GetMyPlayfabId() + "\", \"KickedPlayerId\":\"" + kickedPlayerId + "\", \"Jwt\":\"" + new DataManager().GetJwt() + "\"}";
             klijent.PosaljiServeru(command);
             string odgovor = klijent.PrimiOdServera();
             RoomUIResponse response = JsonConvert.DeserializeObject<RoomUIResponse>(odgovor);

@@ -134,8 +134,8 @@
     <Compile Include="Assets\Mirror\Runtime\Empty\Cloud\ListServer.cs" />
     <Compile Include="Assets\Mirror\Runtime\Empty\Logging\LogFactory.cs" />
     <Compile Include="Assets\Mirror\Runtime\NetworkReaderPool.cs" />
-    <Compile Include="Assets\Mirror\Runtime\SyncDictionary.cs" />
     <Compile Include="Assets\Mirror\Runtime\Empty\Cloud\ICoroutineRunner.cs" />
+    <Compile Include="Assets\Mirror\Runtime\SyncDictionary.cs" />
     <Compile Include="Assets\Mirror\Runtime\Empty\Cloud\QuickListServerDebug.cs" />
     <Compile Include="Assets\Mirror\Runtime\Empty\Cloud\ServerListUIItem.cs" />
     <Compile Include="Assets\Mirror\Runtime\Empty\Logging\ConsoleColorLogHandler.cs" />

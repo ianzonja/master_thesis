@@ -15,4 +15,6 @@ public class PlayerData
     public string InGameStatus { get; set; }
 
     public string Avatar { get; set; }
+
+    public CardData[] Hand { get; set; }
 }

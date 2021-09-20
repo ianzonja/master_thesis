@@ -41,6 +41,7 @@ public class RoomSetupUI : MonoBehaviour
             RoomSetupResponse response = JsonConvert.DeserializeObject<RoomSetupResponse>(odgovor);
             DataManager dm = new DataManager();
             dm.SetRoom(response.MyData);
+            dm.SetIsGameHost(true);
         }
         else
         {

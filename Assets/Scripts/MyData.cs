@@ -30,11 +30,13 @@ public class MyData
 
     public string Jwt { get; set; }
 
+    public bool IsGameHost { get; set; }
+
     public bool IsLoggedIn { get; set; }
     public bool IsDealer { get; set; }
     public bool IsNewRound { get; set; }
     public bool CardsDealt { get; set; }
-    
+
     public string SessionTicket { get; internal set; }
 
     public string MyPlayfabId { get; set; }
@@ -44,5 +46,11 @@ public class MyData
     public Room Room { get; set; }
 
     public List<Room> LobbyRooms { get; set; }
+
+    public Game Game { get; set; }
+
+    public bool HandEmpty { get; set; }
+
+    public string IngameStatus { get; set; }
 }
 

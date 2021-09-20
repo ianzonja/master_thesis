@@ -156,4 +156,90 @@ public class DataManager
             return MyData.Instance.Jwt;
         }
     }
+
+    public bool GetIsDealer()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.IsDealer;
+        }
+    }
+
+    public bool GetIsGameHost()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.IsGameHost;
+        }
+    }
+
+    public void SetIsGameHost(bool isGameHost)
+    {
+        lock (_Lock)
+        {
+            MyData.Instance.IsGameHost = isGameHost;
+        }
+    }
+
+    public void SetMyGame(Game game)
+    {
+        lock (_Lock)
+        {
+            MyData.Instance.Game = game;
+        }
+    }
+
+    public Game GetMyGame()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.Game;
+        }
+    }
+
+    public bool GetMyHandEmpty()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.HandEmpty;
+        }
+    }
+
+    public void SetMyHandEmpty(bool value)
+    {
+        lock (_Lock)
+        {
+            MyData.Instance.HandEmpty = value;
+        }
+    }
+
+    public void SetMyIngameStats(string status)
+    {
+        lock (_Lock)
+        {
+            MyData.Instance.IngameStatus = status;
+        }
+    }
+
+    public string GetMyIngameStatus()
+    {
+        lock (_Lock)
+        {
+            return MyData.Instance.IngameStatus;
+        }
+    }
+
+    public string GetPlayerIngameStatus(string playfabId)
+    {
+        lock (_Lock)
+        {
+            var roomPlayers = MyData.Instance.Room.Players;
+            for(int i=0; i<roomPlayers.Length; i++)
+            {
+                if (roomPlayers[i].PlayfabId == playfabId)
+                    return roomPlayers[i].InGameStatus;
+            }
+            return "";
+        }
+    }
 }
